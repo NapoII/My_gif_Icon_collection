@@ -9,7 +9,7 @@ def create_markdown_links(directory):
     for filename in os.listdir(directory):
         if filename.endswith(".gif"):
             gif_path = f"My_gif_Icon_collection/{filename}"
-            markdown_links += f"<img src=\"{gif_path}\" alt=\"{filename}\" width=\"200\" /> "
+            markdown_links += f"<img src=\"{gif_path}\" alt=\"{filename}\" width=\"100\" /> "
             markdown_links += f"[{filename}]({gif_path})  "
             image_count += 1
             

@@ -5,17 +5,9 @@ def create_markdown_links(directory):
     markdown_links = ""
     images_per_row = 3
     image_count = 0
-    current_group = ""
-
-    for filename in sorted(os.listdir(directory)):
+    
+    for filename in os.listdir(directory):
         if filename.endswith(".gif"):
-            group, _, file_name = filename.partition('_')
-            if group != current_group:
-                if markdown_links:
-                    markdown_links += "\n\n"
-                markdown_links += f"[{group}]({group.capitalize()})\n"
-                current_group = group
-            
             gif_path = f"My_gif_Icon_collection/{filename}"
             markdown_links += f"<img src=\"{gif_path}\" alt=\"{filename}\" width=\"100\" /> "
             markdown_links += f"[{filename}]({gif_path})  "

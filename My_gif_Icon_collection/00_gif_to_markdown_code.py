@@ -1,5 +1,5 @@
 import os
-import pyperclip
+import sys
 
 def create_markdown_links(directory):
     markdown_links = ""
@@ -8,7 +8,7 @@ def create_markdown_links(directory):
     
     for filename in os.listdir(directory):
         if filename.endswith(".gif"):
-            gif_path = f"My_gif_Icon_collection/{filename}"
+            gif_path = os.path.join(directory, filename)
             markdown_links += f"<img src=\"{gif_path}\" alt=\"{filename}\" width=\"100\" /> "
             markdown_links += f"[{filename}]({gif_path})  "
             image_count += 1
@@ -20,9 +20,13 @@ def create_markdown_links(directory):
     return markdown_links
 
 if __name__ == "__main__":
-    current_directory = os.getcwd()
-    current_directory = os.path.join(current_directory, "My_gif_Icon_collection")
-    markdown_content = create_markdown_links(current_directory)
-    pyperclip.copy(markdown_content)
+    if len(sys.argv) > 1:
+        directory = sys.argv[1]
+    else:
+        directory = os.getcwd()
+    
+    markdown_content = create_markdown_links(directory)
+    with open("output.md", "w") as file:
+        file.write(markdown_content)
 
-    print("Markdown content copied to the clipboard.")
+    input("Markdown content written to output.md.")
